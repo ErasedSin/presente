@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presente Flor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            animation: gradient 5s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-color: #e0bbff; }
+            50% { background-color: #ffb3ff; }
+            100% { background-color: #e0bbff; }
+        }
+
+        #welcome-screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        .welcome-text {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .play-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: auto;
+            opacity: 0;
+            transition: opacity 1s ease;
+            z-index: 1;
+        }
+
+        .message-box {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+            display: none;
+            z-index: 2;
+            width: 80%;
+            max-width: 400px;
+            font-size: 1.5rem;
+        }
+
+        .icon {
+            font-size: 50px;
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.2s;
+            z-index: 3;
+        }
+
+        .icon:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-screen">
+        <div class="welcome-text">Um presente especial para você!</div>
+        <button class="play-btn" onclick="showFlowerScreen()">
+            <img src="cartinha.png" alt="Cartinha com coração" style="width: 50px;">
+        </button>
+    </div>
+
+    <div id="flower-screen" style="display: none;">
+        <video id="background-video" src="Fallen Leaves by AnasAbdin.mp4" muted autoplay loop></video>
+        <audio id="background-music" src="Som.ogg" loop></audio>
+        
+        <div id="message-box" class="message-box"></div>
+
+        <!-- Ícones Emoji organizados -->
+        <div class="icon" style="top: 10%; left: 10%;" onclick="showMessage('Nathy, conhecer você foi algo inesperado, e desde o momento em que nossas vidas se cruzaram, tudo mudou.')">📮</div>
+        <div class="icon" style="top: 20%; left: 20%;" onclick="showMessage('Embora atualmente sejamos apenas amigos, conhecer alguém que já sentiu algo por mim me trouxe uma nova perspectiva sobre a vida.')">❤️</div>
+        <div class="icon" style="top: 10%; left: 40%;" onclick="showMessage('Antes, eu andava desanimado e desapontado, mas um simples gesto seu me fez ver as coisas de outra forma.')">☀️</div>
+        <div class="icon" style="top: 30%; left: 25%;" onclick="showMessage('Não se preocupe, não estou dizendo isso para forçar nada; é apenas uma forma de agradecer.')">🌙</div>
+        <div class="icon" style="top: 40%; left: 10%;" onclick="showMessage('Que você seja sempre muito feliz e muito obrigado!')">🌸</div>
+        <div class="icon" style="top: 50%; left: 20%;" onclick="showMessage('Feliz aniversário e aproveite o seu dia!')">😊</div>
+        <div class="icon" style="top: 70%; left: 15%;" onclick="showMessage('Do seu amigo do Rio.')">☁️</div>
+    </div>
+
+    <script>
+        function showFlowerScreen() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            welcomeScreen.style.opacity = '0';
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+            }, 1000);
+
+            const flowerScreen = document.getElementById('flower-screen');
+            flowerScreen.style.display = 'block';
+
+            const backgroundVideo = document.getElementById('background-video');
+            backgroundVideo.style.opacity = '1';
+            backgroundVideo.play();
+
+            const backgroundMusic = document.getElementById('background-music');
+            backgroundMusic.volume = 0.2;
+            backgroundMusic.play();
+        }
+
+        function showMessage(text) {
+            const messageBox = document.getElementById('message-box');
+            messageBox.textContent = text;
+            messageBox.style.display = 'block';
+            messageBox.style.opacity = '0';
+
+            setTimeout(() => {
+                messageBox.style.opacity = '1';
+            }, 10);
+
+            // Mantenha a mensagem visível por 10 segundos antes de esconder
+            setTimeout(() => {
+                hideMessage();
+            }, 10000); // Tempo que a mensagem ficará visível (10 segundos)
+
+            // Esconde a mensagem ao clicar fora
+            document.addEventListener('click', function hideMessage(event) {
+                if (!messageBox.contains(event.target)) {
+                    hideMessage();
+                    document.removeEventListener('click', hideMessage);
+                }
+            });
+        }
+
+        function hideMessage() {
+            const messageBox = document.getElementById('message-box');
+            messageBox.style.opacity = '0';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 1000);
+        }
+
+        window.onload = function() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            welcomeScreen.style.opacity = '1';
+        };
+    </script>
+
+</body>
+</html>
