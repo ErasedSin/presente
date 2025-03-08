@@ -153,11 +153,12 @@
                 hideMessage();
             }, 10000); // Tempo que a mensagem ficará visível (10 segundos)
 
-            // Se for a última mensagem, toca a música
+            // Se for a última mensagem, pausa a primeira música e toca a segunda
             const allIcons = document.querySelectorAll('.icon');
             const lastIcon = allIcons[allIcons.length - 1];
             if (text === 'Que você continue conquistando tudo o que quiser, com muita felicidade e amor!') {
-                playRoundaboutMusic();
+                pauseBackgroundMusic(); // Pausar a primeira música
+                playRoundaboutMusic(); // Tocar a segunda música
             }
 
             // Esconde a mensagem ao clicar fora
@@ -181,6 +182,11 @@
             const roundaboutMusic = document.getElementById('roundabout-music');
             roundaboutMusic.volume = 0.2;
             roundaboutMusic.play(); // Toca a nova música
+        }
+
+        function pauseBackgroundMusic() {
+            const backgroundMusic = document.getElementById('background-music');
+            backgroundMusic.pause(); // Pausa a música inicial
         }
 
         window.onload = function() {
