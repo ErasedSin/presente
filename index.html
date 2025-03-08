@@ -137,10 +137,6 @@
             const backgroundMusic = document.getElementById('background-music');
             backgroundMusic.pause(); // Para a música inicial
             backgroundMusic.currentTime = 0; // Reseta a música inicial
-
-            const roundaboutMusic = document.getElementById('roundabout-music');
-            roundaboutMusic.volume = 0.2;
-            roundaboutMusic.play(); // Toca a nova música
         }
 
         function showMessage(text) {
@@ -158,6 +154,13 @@
                 hideMessage();
             }, 10000); // Tempo que a mensagem ficará visível (10 segundos)
 
+            // Se for a última mensagem, toca a música
+            const allIcons = document.querySelectorAll('.icon');
+            const lastIcon = allIcons[allIcons.length - 1];
+            if (text === 'Que você continue conquistando tudo o que quiser, com muita felicidade e amor!') {
+                playRoundaboutMusic();
+            }
+
             // Esconde a mensagem ao clicar fora
             document.addEventListener('click', function hideMessage(event) {
                 if (!messageBox.contains(event.target)) {
@@ -173,6 +176,12 @@
             setTimeout(() => {
                 messageBox.style.display = 'none';
             }, 1000);
+        }
+
+        function playRoundaboutMusic() {
+            const roundaboutMusic = document.getElementById('roundabout-music');
+            roundaboutMusic.volume = 0.2;
+            roundaboutMusic.play(); // Toca a nova música
         }
 
         window.onload = function() {
