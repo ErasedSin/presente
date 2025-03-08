@@ -105,19 +105,19 @@
     <div id="flower-screen" style="display: none;">
         <video id="background-video" src="Fallen Leaves by AnasAbdin.mp4" muted autoplay loop></video>
         <audio id="background-music" src="Som.ogg" loop></audio>
+        <audio id="roundabout-music" src="Roundabout.ogg" loop></audio>
         
         <div id="message-box" class="message-box"></div>
 
         <!-- Ícones Emoji organizados -->
-           <div class="icon" style="top:  0%; left: 10%;" onclick="showMessage('POR FAVOR VIRE O CELULAR!!!!! Hoje é um dia especial, e eu queria aproveitar para te dizer algumas coisas...')">📮</div>
-    <div class="icon" style="top: 10%; left: 20%;" onclick="showMessage('Vitória, você é forte, determinada e incrível! No Judô, na vida, em tudo que faz, você sempre se destaca!')">🥋</div>
-    <div class="icon" style="top: 20%; left: 10%;" onclick="showMessage('Você tem um jeito especial de iluminar o dia das pessoas ao seu redor, e eu sou sortudo por te conhecer.')">☀️</div>
-    <div class="icon" style="top: 30%; left: 20%;" onclick="showMessage('Hoje, no Dia da Mulher, quero lembrar o quanto você é especial e merece todo carinho do mundo.')">🌙</div>
-    <div class="icon" style="top: 40%; left: 10%;" onclick="showMessage('Que seu sorriso nunca falte, que seus sonhos se realizem e que você continue brilhando sempre!')">🌸</div>
-    <div class="icon" style="top: 50%; left: 20%;" onclick="showMessage('Obrigado por ser essa pessoa incrível. Feliz Dia da Mulher, que seu dia seja tão lindo quanto você!')">😊</div>
-    <div class="icon" style="top: 60%; left: 10%;" onclick="showMessage('Que você continue conquistando tudo o que quiser, com muita felicidade e amor!')">💖</div>
-</div>
-
+        <div class="icon" style="top: 0%; left: 10%;" onclick="showMessage('POR FAVOR VIRE O CELULAR!!!!! Hoje é um dia especial, e eu queria aproveitar para te dizer algumas coisas...')">📮</div>
+        <div class="icon" style="top: 10%; left: 20%;" onclick="showMessage('Vitória, você é forte, determinada e incrível! No Judô, na vida, em tudo que faz, você sempre se destaca!')">🥋</div>
+        <div class="icon" style="top: 20%; left: 10%;" onclick="showMessage('Você tem um jeito especial de iluminar o dia das pessoas ao seu redor, e eu sou sortudo por te conhecer.')">☀️</div>
+        <div class="icon" style="top: 30%; left: 20%;" onclick="showMessage('Hoje, no Dia da Mulher, quero lembrar o quanto você é especial e merece todo carinho do mundo.')">🌙</div>
+        <div class="icon" style="top: 40%; left: 10%;" onclick="showMessage('Que seu sorriso nunca falte, que seus sonhos se realizem e que você continue brilhando sempre!')">🌸</div>
+        <div class="icon" style="top: 50%; left: 20%;" onclick="showMessage('Obrigado por ser essa pessoa incrível. Feliz Dia da Mulher, que seu dia seja tão lindo quanto você!')">😊</div>
+        <div class="icon" style="top: 60%; left: 10%;" onclick="showMessage('Que você continue conquistando tudo o que quiser, com muita felicidade e amor!')">💖</div>
+    </div>
 
     <script>
         function showFlowerScreen() {
@@ -135,8 +135,12 @@
             backgroundVideo.play();
 
             const backgroundMusic = document.getElementById('background-music');
-            backgroundMusic.volume = 0.2;
-            backgroundMusic.play();
+            backgroundMusic.pause(); // Para a música inicial
+            backgroundMusic.currentTime = 0; // Reseta a música inicial
+
+            const roundaboutMusic = document.getElementById('roundabout-music');
+            roundaboutMusic.volume = 0.2;
+            roundaboutMusic.play(); // Toca a nova música
         }
 
         function showMessage(text) {
