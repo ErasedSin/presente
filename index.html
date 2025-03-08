@@ -136,6 +136,17 @@
 
             const backgroundMusic = document.getElementById('background-music');
             backgroundMusic.play(); // Música inicial (Som.ogg)
+
+            // Ativar tela cheia
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // Internet Explorer/Edge
+                document.documentElement.msRequestFullscreen();
+            }
         }
 
         function showMessage(text) {
